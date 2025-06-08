@@ -1,64 +1,64 @@
 // src/components/Assignments/index.tsx
 
-import React, { useState } from 'react';                 
-import { Header } from '../Header';                      
+import React, { useState } from 'react';
+import { Header } from '../Header';
 import { Assignment, AssignmentType } from '../Assignment';
 import styles from './assignments.module.css';
 
 export function Assignments() {
-  //  Our list of assignments in state
   const [assignments, setAssignments] = useState<AssignmentType[]>([]);
-  //Simple counter for unique IDs
   const [nextId, setNextId] = useState(1);
 
-  // Called by Header when you hit Create
-  function handleAdd(title: string) {
+  function handleAdd(title: string, dueString: string) {
+    const dueDate = dueString ? new Date(dueString) : undefined;
     setAssignments(prev => [
       ...prev,
-      { id: nextId, title, completed: false },
+      { id: nextId, title, completed: false, due: dueDate },
     ]);
     setNextId(prev => prev + 1);
   }
 
-  // Called by Assignment when ya click the circle
   function handleToggle(id: number) {
     setAssignments(prev =>
-      prev.map(a => (a.id === id ? { ...a, completed: !a.completed } : a))
+      prev.map(a =>
+        a.id === id ? { ...a, completed: !a.completed } : a
+      )
     );
   }
 
-  // called by Assignment when you click the trash icon**
   function handleDelete(id: number) {
     setAssignments(prev => prev.filter(a => a.id !== id));
   }
 
   return (
-    <div className={styles.assignments}>
-      {/* Form + Create button */}
+    <div className={styles.container}>
+      {/* form */}
       <Header onAdd={handleAdd} />
 
-      {/* Stats */}
-      <section className={styles.header}>
-        <div>
-          <p>Created</p>
-          <span>{assignments.length}</span>
+      {/* stats panel */}
+      <section className={styles.stats}>
+        <div className={styles.statsItem}>
+          <p className={styles.createdLabel}>Created</p>
+          <span className={styles.badge}>
+            {assignments.length}
+          </span>
         </div>
-        <div>
-          <p className={styles.textPurple}>Completed</p>
-          <span>
+        <div className={styles.statsItem}>
+          <p className={styles.completedLabel}>Completed</p>
+          <span className={styles.badge}>
             {assignments.filter(a => a.completed).length} / {assignments.length}
           </span>
         </div>
       </section>
 
-      {/* List of items */}
+      {/* list */}
       <div className={styles.list}>
         {assignments.map(item => (
           <Assignment
             key={item.id}
             assignment={item}
             onToggleComplete={() => handleToggle(item.id)}
-            onDelete={() => handleDelete(item.id)}   // ← delete handler wired up
+            onDelete={() => handleDelete(item.id)}
           />
         ))}
       </div>

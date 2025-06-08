@@ -1,43 +1,62 @@
-.assignments {
-  width: 100%;
-  max-width: 736px;
-  margin: 0 auto;
-  margin-top: 90px;
-  padding: 0 1rem;
+/* src/components/Assignments/assignments.module.css */
+
+:global(:root) {
+  --font-base: system-ui, -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --color-blue: #4ea8de;
+  --color-purple: #8284fa;
+  --color-bg-secondary: #333333;
+  --color-text-light: #d9d9d9;
 }
 
-.header {
+/* overall wrapper */
+.container {
+  width: 100%;
+  max-width: 736px;
+  margin: 230px auto 0; /* drop below header+form */
+  padding: 0 1rem;
+  font-family: var(--font-base);
+}
+
+/* stats panel */
+.stats {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   margin-bottom: 24px;
 }
 
-.header > div {
+/* each stats item */
+.statsItem {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.header p {
-  color: #4ea8de;
+/* “Created” label */
+.createdLabel {
+  color: var(--color-blue);
   font-size: 14px;
   font-weight: 700;
 }
 
-.textPurple {
-  color: #8284fa !important;
+/* “Completed” label */
+.completedLabel {
+  color: var(--color-purple);
+  font-size: 14px;
+  font-weight: 700;
 }
 
-.header span {
-  background: #333333;
-  color: #d9d9d9;
+/* badge styling */
+.badge {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-light);
   padding: 3px 9px;
   border-radius: 999px;
   font-size: 12px;
   font-weight: 700;
 }
 
+/* assignment list container */
 .list {
   display: flex;
   flex-direction: column;

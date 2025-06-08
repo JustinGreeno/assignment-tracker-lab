@@ -80,3 +80,13 @@
   /* muted trash icon */
   color: var(--color-text-muted);
 }
+
+/* add to the bottom of src/components/Assignment/assignment.module.css */
+
+.dueBadge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+}
