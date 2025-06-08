@@ -40,7 +40,7 @@ export function Assignment({ assignment, onToggleComplete, onDelete }: Props) {
         {assignment.title}
       </p>
 
-      {/* **Step 3 delete button** */}
+      {/* **Trash Delete button** */}
       <button
         onClick={onDelete}
         className={styles.deleteButton}

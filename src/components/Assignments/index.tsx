@@ -6,9 +6,9 @@ import { Assignment, AssignmentType } from '../Assignment';
 import styles from './assignments.module.css';
 
 export function Assignments() {
-  // 1) Our list of assignments in state
+  //  Our list of assignments in state
   const [assignments, setAssignments] = useState<AssignmentType[]>([]);
-  // 2) Simple counter for unique IDs
+  //Simple counter for unique IDs
   const [nextId, setNextId] = useState(1);
 
   // Called by Header when you hit Create
