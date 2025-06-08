@@ -20,14 +20,14 @@ export function Assignments() {
     setNextId(prev => prev + 1);
   }
 
-  // Called by Assignment when you click the circle
+  // Called by Assignment when ya click the circle
   function handleToggle(id: number) {
     setAssignments(prev =>
       prev.map(a => (a.id === id ? { ...a, completed: !a.completed } : a))
     );
   }
 
-  // **Step 3: Called by Assignment when you click the trash icon**
+  // called by Assignment when you click the trash icon**
   function handleDelete(id: number) {
     setAssignments(prev => prev.filter(a => a.id !== id));
   }

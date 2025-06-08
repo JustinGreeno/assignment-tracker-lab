@@ -1,22 +1,8 @@
 /* src/components/Header/header.module.css */
 
-/* 1) Core font + colour palette */
-:global(:root) {
-  --font-base: system-ui, -apple-system, BlinkMacSystemFont,
-               "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-  --color-bg-primary: #0d0d0d;     /* header background */
-  --color-bg-dark: #262626;        /* input background */
-  --color-input-border: #0d0d0d;   /* input border */
-  --color-text-light: #ffffff;     /* light text */
-  --color-text-placeholder: #808080;/* placeholder text */
-  --color-btn-primary: #8284fa;    /* create button */
-  --color-btn-disabled: rgb(139,58,58); /* disabled button */
-}
-
-/* 2) Header wrapper */
+/* Header container */
 .header {
-  font-family: var(--font-base);
-  background: var(--color-bg-primary);
+  background: #0d0d0d;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,55 +10,56 @@
   position: relative;
 }
 
-/* 3) Form below header */
+/* Form positioned below the header */
 .newAssignmentForm {
   position: absolute;
-  bottom: -27px;
+  bottom: 10px;       /* moved up */
   width: 100%;
   max-width: 736px;
   height: 54px;
   display: flex;
   gap: 8px;
   padding: 0 1rem;
+  z-index: 10;         /* ensure it sits above other elements */
 }
 
-/* 4) Text input */
+/* Text input */
 .newAssignmentForm input {
   flex: 1;
   height: 100%;
   font-family: var(--font-base);
   font-size: 16px;
-  color: var(--color-text-light);
-  background: var(--color-bg-dark);
-  border: 1px solid var(--color-input-border);
+  color: #ffffff;
+  background: #262626;
+  border: 1px solid #0d0d0d;
   border-radius: 8px;
   padding: 0 16px;
 }
 
-/* 5) Placeholder text */
+/* Placeholder styling */
 .newAssignmentForm input::placeholder {
-  color: var(--color-text-placeholder);
+  color: #808080;
 }
 
-/* 6) Create button */
+/* Create button */
 .newAssignmentForm button {
-  font-family: var(--font-base);
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 0 16px;
   height: 100%;
+  font-family: var(--font-base);
   font-size: 14px;
   font-weight: 700;
-  background: var(--color-btn-primary);
-  color: var(--color-text-light);
+  background: #8284fa;
+  color: #ffffff;
   border: none;
   border-radius: 8px;
   cursor: pointer;
 }
 
-/* 7) Disabled button state */
+/* Disabled Create button */
 .newAssignmentForm button:disabled {
-  background: var(--color-btn-disabled);
+  background: rgb(139, 58, 58);
   cursor: not-allowed;
 }
