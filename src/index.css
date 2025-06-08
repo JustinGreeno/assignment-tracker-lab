@@ -1,0 +1,60 @@
+/* index.css */
+/* I needed a ctahc all floor on my css */
+
+/* 1. Reset box model & remove default margins/padding */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 2. Base font settings */
+html {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;      /* 1rem = 16px */
+  line-height: 1.5;     /* comfortable reading */
+  color: #333;          /* dark gray text */
+}
+
+/* 3. Body container */
+body {
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  padding: 1rem;        /* page padding */
+}
+
+/* 4. Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* 5. Paragraphs */
+p {
+  margin-bottom: 1rem;
+}
+
+/* 6. Links */
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* 7. Lists */
+ul, ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* 8. Buttons inherit font & show pointer */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+}

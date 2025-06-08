@@ -1,24 +1,63 @@
-import { Assignment } from "../Assignment";
-import styles from "./assignments.module.css";
+// src/components/Assignments/index.tsx
+import React, { useState } from 'react';
+import { Header } from '../Header';
+import { Assignment, AssignmentType } from '../Assignment';
+import styles from './assignments.module.css';
 
 export function Assignments() {
+  const [assignments, setAssignments] = useState<AssignmentType[]>([]);
+  const [nextId, setNextId] = useState(1);
+
+  // add a new assignment
+  const handleAdd = (title: string) => {
+    setAssignments(prev => [
+      ...prev,
+      { id: nextId, title, completed: false },
+    ]);
+    setNextId(id => id + 1);
+  };
+
+  // toggle complete/incomplete
+  const handleToggle = (id: number) => {
+    setAssignments(prev =>
+      prev.map(a =>
+        a.id === id ? { ...a, completed: !a.completed } : a
+      )
+    );
+  };
+
+  // delete an assignment
+  const handleDelete = (id: number) => {
+    setAssignments(prev => prev.filter(a => a.id !== id));
+  };
+
   return (
-    <section className={styles.assignments}>
-      <header className={styles.header}>
-        <div>
-          <p>Created Assignments</p>
-          <span>1</span>
-        </div>
+    <main className={styles.main}>
+      {/* header + form */}
+      <Header onAdd={handleAdd} />
 
-        <div>
-          <p className={styles.textPurple}>Completed Assignments</p>
-          <span>1 of 1</span>
-        </div>
-      </header>
+      {/* stats */}
+      <section className={styles.stats}>
+        <p>Created Assignments: {assignments.length}</p>
+        <p>
+          Completed Assignments:{' '}
+          {assignments.filter(a => a.completed).length} of{' '}
+          {assignments.length}
+        </p>
+      </section>
 
-      <div className={styles.list}>
-        <Assignment />
-      </div>
-    </section>
+      {/* list */}
+      <ul className={styles.list}>
+        {assignments.map(item => (
+          <li key={item.id}>
+            <Assignment
+              assignment={item}
+              onToggleComplete={() => handleToggle(item.id)}
+              onDelete={() => handleDelete(item.id)}
+            />
+          </li>
+        ))}
+      </ul>
+    </main>
   );
 }

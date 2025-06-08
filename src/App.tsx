@@ -1,13 +1,8 @@
-import { Header } from "./components/Header";
-import { Assignments } from "./components/Assignments";
+// src/App.tsx
+// your top-level component just renders the Assignments feature
+import React from 'react';
+import { Assignments } from './components/Assignments';
 
-function App() {
-  return (
-    <>
-      <Header />
-      <Assignments />
-    </>
-  );
+export default function App() {
+  return <Assignments />;
 }
-
-export default App;

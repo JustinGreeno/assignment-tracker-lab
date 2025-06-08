@@ -1,11 +1,28 @@
+/* src/components/Assignments/assignments.module.css */
+
+/* 1) Core font + colour palette */
+:global(:root) {
+  --font-base: system-ui, -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --color-accent: #4ea8de;       /* blue */
+  --color-purple: #8284fa;       /* purple */
+  --color-bg-secondary: #333333; /* dark grey */
+  --color-text-alt: #d9d9d9;     /* light grey */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-weight-bold: 700;
+}
+
+/* 2) Container */
 .assignments {
+  font-family: var(--font-base);
   width: 100%;
   max-width: 736px;
-  margin: 0 auto;
-  margin-top: 90px;
+  margin: 90px auto 0;
   padding: 0 1rem;
 }
 
+/* 3) Header row */
 .header {
   display: flex;
   align-items: center;
@@ -19,25 +36,29 @@
   gap: 8px;
 }
 
+/* 4) Accent text */
 .header p {
-  color: #4ea8de;
-  font-size: 14px;
-  font-weight: 700;
+  color: var(--color-accent);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
 }
 
+/* 5) Purple highlight */
 .textPurple {
-  color: #8284fa !important;
+  color: var(--color-purple) !important;
 }
 
+/* 6) Badge */
 .header span {
-  background: #333333;
-  color: #d9d9d9;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-alt);
   padding: 3px 9px;
   border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
 }
 
+/* 7) List layout */
 .list {
   display: flex;
   flex-direction: column;
