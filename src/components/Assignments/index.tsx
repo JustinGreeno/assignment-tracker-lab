@@ -1,63 +1,67 @@
 // src/components/Assignments/index.tsx
-import React, { useState } from 'react';
-import { Header } from '../Header';
+
+import React, { useState } from 'react';                 
+import { Header } from '../Header';                      
 import { Assignment, AssignmentType } from '../Assignment';
 import styles from './assignments.module.css';
 
 export function Assignments() {
+  // 1) Our list of assignments in state
   const [assignments, setAssignments] = useState<AssignmentType[]>([]);
+  // 2) Simple counter for unique IDs
   const [nextId, setNextId] = useState(1);
 
-  // add a new assignment
-  const handleAdd = (title: string) => {
+  // Called by Header when you hit Create
+  function handleAdd(title: string) {
     setAssignments(prev => [
       ...prev,
       { id: nextId, title, completed: false },
     ]);
-    setNextId(id => id + 1);
-  };
+    setNextId(prev => prev + 1);
+  }
 
-  // toggle complete/incomplete
-  const handleToggle = (id: number) => {
+  // Called by Assignment when you click the circle
+  function handleToggle(id: number) {
     setAssignments(prev =>
-      prev.map(a =>
-        a.id === id ? { ...a, completed: !a.completed } : a
-      )
+      prev.map(a => (a.id === id ? { ...a, completed: !a.completed } : a))
     );
-  };
+  }
 
-  // delete an assignment
-  const handleDelete = (id: number) => {
+  // **Step 3: Called by Assignment when you click the trash icon**
+  function handleDelete(id: number) {
     setAssignments(prev => prev.filter(a => a.id !== id));
-  };
+  }
 
   return (
-    <main className={styles.main}>
-      {/* header + form */}
+    <div className={styles.assignments}>
+      {/* Form + Create button */}
       <Header onAdd={handleAdd} />
 
-      {/* stats */}
-      <section className={styles.stats}>
-        <p>Created Assignments: {assignments.length}</p>
-        <p>
-          Completed Assignments:{' '}
-          {assignments.filter(a => a.completed).length} of{' '}
-          {assignments.length}
-        </p>
+      {/* Stats */}
+      <section className={styles.header}>
+        <div>
+          <p>Created</p>
+          <span>{assignments.length}</span>
+        </div>
+        <div>
+          <p className={styles.textPurple}>Completed</p>
+          <span>
+            {assignments.filter(a => a.completed).length} / {assignments.length}
+          </span>
+        </div>
       </section>
 
-      {/* list */}
-      <ul className={styles.list}>
+      {/* List of items */}
+      <div className={styles.list}>
         {assignments.map(item => (
-          <li key={item.id}>
-            <Assignment
-              assignment={item}
-              onToggleComplete={() => handleToggle(item.id)}
-              onDelete={() => handleDelete(item.id)}
-            />
-          </li>
+          <Assignment
+            key={item.id}
+            assignment={item}
+            onToggleComplete={() => handleToggle(item.id)}
+            onDelete={() => handleDelete(item.id)}   // ← delete handler wired up
+          />
         ))}
-      </ul>
-    </main>
+      </div>
+    </div>
   );
 }

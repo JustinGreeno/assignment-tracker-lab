@@ -1,9 +1,10 @@
 // src/components/Assignment/index.tsx
-import { TbTrash } from 'react-icons/tb';
+
+import { TbTrash } from 'react-icons/tb';          // trash icon
 import { BsCircle, BsCheckCircleFill } from 'react-icons/bs';
 import styles from './assignment.module.css';
 
-// shape of each assignment
+// The shape of each assignment
 export interface AssignmentType {
   id: number;
   title: string;
@@ -11,16 +12,12 @@ export interface AssignmentType {
 }
 
 interface Props {
-  assignment: AssignmentType;       // data for this item
-  onToggleComplete: () => void;     // flip completed state
-  onDelete: () => void;             // remove this item
+  assignment: AssignmentType;
+  onToggleComplete: () => void;
+  onDelete: () => void;                          // delete callback
 }
 
-export function Assignment({
-  assignment,
-  onToggleComplete,
-  onDelete,
-}: Props) {
+export function Assignment({ assignment, onToggleComplete, onDelete }: Props) {
   return (
     <div className={styles.assignment}>
       {/* toggle complete/incomplete */}
@@ -28,28 +25,22 @@ export function Assignment({
         onClick={onToggleComplete}
         className={styles.checkContainer}
         aria-label={
-          assignment.completed
-            ? 'Mark as incomplete'
-            : 'Mark as complete'
+          assignment.completed ? 'Mark incomplete' : 'Mark complete'
         }
       >
         {assignment.completed ? (
-          <BsCheckCircleFill size={20} />  // filled check
+          <BsCheckCircleFill size={20} />
         ) : (
-          <BsCircle size={20} />           // empty circle
+          <BsCircle size={20} />
         )}
       </button>
 
-      {/* title, struck-through if completed */}
-      <p
-        className={
-          assignment.completed ? styles.textCompleted : ''
-        }
-      >
+      {/* title text */}
+      <p className={assignment.completed ? styles.textCompleted : ''}>
         {assignment.title}
       </p>
 
-      {/* delete icon */}
+      {/* **Step 3 delete button** */}
       <button
         onClick={onDelete}
         className={styles.deleteButton}
